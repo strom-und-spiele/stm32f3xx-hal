@@ -586,7 +586,7 @@ macro_rules! gpio {
                             let offset : u32 = 2 * $i;
 
                             moder.moder().modify(|r, w| unsafe {
-                                w.bits((r.bits() | (0b11 << offset))
+                                w.bits(r.bits() | (0b11 << offset))
                             });
 
                             $PXi { _mode: PhantomData }
