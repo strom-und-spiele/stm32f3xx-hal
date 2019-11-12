@@ -28,6 +28,9 @@ pub struct PullDown;
 /// Pulled up input (type state)
 pub struct PullUp;
 
+/// Analog input (type state)
+pub struct Analog;
+
 /// Output mode (type state)
 pub struct Output<MODE> {
     _mode: PhantomData<MODE>,
@@ -197,6 +200,7 @@ macro_rules! gpio {
                 use crate::rcc::AHB;
                 use super::{
                     AF4, AF5, AF6, AF7, AF14, Floating, GpioExt, Input, OpenDrain, Output,
+                    Analog,
                     PullDown, PullUp, PushPull,
                     PXx, Gpio,
                 };
@@ -573,6 +577,17 @@ macro_rules! gpio {
                             otyper
                                 .otyper()
                                 .modify(|r, w| unsafe { w.bits(r.bits() & !(0b1 << $i)) });
+
+                            $PXi { _mode: PhantomData }
+                        }
+
+                        /// Configure the pin to operate as an analog input pin
+                        pub fn into_analog(self, moder: &mut MODER) -> $PXi<Analog> {
+                            let offset : u32 = 2 * $i;
+
+                            moder.moder().modify(|r, w| unsafe {
+                                w.bits((r.bits() | (0b11 << offset))
+                            });
 
                             $PXi { _mode: PhantomData }
                         }
