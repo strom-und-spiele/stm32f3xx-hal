@@ -582,11 +582,20 @@ macro_rules! gpio {
                         }
 
                         /// Configure the pin to operate as an analog input pin
-                        pub fn into_analog(self, moder: &mut MODER) -> $PXi<Analog> {
+                        pub fn into_analog(
+                            self,
+                            moder: &mut MODER,
+                            pupdr: &mut PUPDR,
+                        ) -> $PXi<Analog> {
                             let offset : u32 = 2 * $i;
 
                             moder.moder().modify(|r, w| unsafe {
                                 w.bits(r.bits() | (0b11 << offset))
+                            });
+
+                            // set to floating as this is the only defined value
+                            pupdr.pupdr().modify(|r, w| unsafe {
+                                w.bits(r.bits() & !(0b11 << offset))
                             });
 
                             $PXi { _mode: PhantomData }
