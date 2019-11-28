@@ -48,6 +48,7 @@ usbd-serial = "0.1.0"
 default = ["unproven"]
 device-selected = []
 rt = ["stm32f3/rt"]
+stm32f3DISCOVERY = ["stm32f303xc"]
 stm32f301 = ["stm32f3/stm32f301", "device-selected"]
 stm32f318 = ["stm32f3/stm32f3x8", "device-selected"]
 stm32f302 = ["stm32f3/stm32f302", "device-selected"]

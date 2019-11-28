@@ -3,17 +3,10 @@
 
 #[cfg(not(feature = "device-selected"))]
 compile_error!(
-    "This crate requires one of the following device features enabled:
-        stm32f301
-        stm32f318
-        stm32f302
-        stm32f303
-        stm32f373
-        stm32f378
-        stm32f334
-        stm32f328
-        stm32f358
-        stm32f398"
+    "This crate requires you to specify your target device as a feautre.  
+    Note that the more specific you pic the device, the more functionality will be available.
+
+    See `Cargo.toml` section 'features' for a comprehensive list of devices (starting with stm32f...)."
 );
 
 pub use embedded_hal as hal;
@@ -49,7 +42,12 @@ pub use stm32f3::stm32f3x8 as stm32;
 #[cfg(feature = "rt")]
 pub use crate::stm32::interrupt;
 
-#[cfg(feature = "device-selected")]
+#[cfg(any(
+    feature = "stm32f303xb",
+    feature = "stm32f303xc",
+    feature = "stm32f303xd",
+    feature = "stm32f303xe",
+))]
 pub mod adc;
 #[cfg(feature = "device-selected")]
 pub mod delay;
