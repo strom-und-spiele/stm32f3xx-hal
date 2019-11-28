@@ -33,9 +33,6 @@ pub struct PullDown;
 /// Pulled up input (type state)
 pub struct PullUp;
 
-/// Analog input (type state)
-pub struct Analog;
-
 /// Output mode (type state)
 pub struct Output<MODE> {
     _mode: PhantomData<MODE>,
