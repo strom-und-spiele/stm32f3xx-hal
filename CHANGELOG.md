@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- ADC support for `stm32f303` devices.
+
 ## [v0.4.0] - 2019-12-27
 
 ### Added
