@@ -42,12 +42,7 @@ pub use stm32f3::stm32f3x8 as stm32;
 #[cfg(feature = "rt")]
 pub use crate::stm32::interrupt;
 
-#[cfg(any(
-    feature = "stm32f303xb",
-    feature = "stm32f303xc",
-    feature = "stm32f303xd",
-    feature = "stm32f303xe",
-))]
+#[cfg(feature = "stm32f303")]
 pub mod adc;
 #[cfg(feature = "device-selected")]
 pub mod delay;
